@@ -20,7 +20,7 @@ class QuizApp:
 
         self.load_previous_attempts()
 
-        # Styling
+        
         self.style = ttk.Style()
         self.style.configure("Correct.TRadiobutton", foreground="green")
         self.style.configure("Incorrect.TRadiobutton", foreground="red")
@@ -28,7 +28,7 @@ class QuizApp:
         self.style.configure("TButton", font=("Arial", 12), background="lightblue")
         self.style.configure("TRadiobutton", font=("Arial", 16))
 
-        # Create a canvas and a scrollbar
+        
         self.canvas = tk.Canvas(master)
         self.scrollbar = ttk.Scrollbar(master, orient="vertical", command=self.canvas.yview)
         self.scrollable_frame = ttk.Frame(self.canvas)
@@ -80,7 +80,7 @@ class QuizApp:
         try:
             with open(self.json_file, 'r') as f:
                 data = json.load(f)
-                random.shuffle(data)  # Shuffle questions
+                random.shuffle(data)  
                 return data
         except FileNotFoundError:
             print(f"Error: File '{self.json_file}' not found.")
@@ -94,7 +94,7 @@ class QuizApp:
             self.option_frame = ttk.Frame(self.scrollable_frame)
             self.option_frame.pack(pady=10)
 
-            for i in range(4):  # Assuming 4 options (A, B, C, D)
+            for i in range(4):  
                 button = ttk.Radiobutton(self.option_frame, text="", variable=self.option_var, value="", command=self.enable_submit, style="TRadiobutton")
                 button.pack(anchor=tk.W, padx=20)
                 self.option_buttons.append(button)
@@ -116,7 +116,7 @@ class QuizApp:
 
             for i, key in enumerate(option_keys):
                 self.option_buttons[i].config(text=f"{key}: {options[key]}", value=key, state=tk.NORMAL)
-            self.option_var.set("")  # Reset the selected option
+            self.option_var.set("")  
 
         else:
             self.show_final_score()
@@ -206,8 +206,8 @@ class QuizApp:
         self.score = 0
         self.load_question()
 
-# Example usage (assuming you have a 'questions.json' file):
+
 if __name__ == "__main__":
     root = tk.Tk()
-    app = QuizApp(root, "questions.json")  # Replace 'questions.json' with your file
+    app = QuizApp(root, "questions.json")  
     root.mainloop()
